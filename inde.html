@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style>
+  .que_box{
+      width: 100%;
+      padding: 30px;
+      min-height: 100px;
+      margin-top: 0;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      background-color: white;
+      border-radius: 0;
+      box-sizing: border-box;
+      resize: none;
+      font-size:20px;
+      box-shadow: none;
+    }
+</style>
+<body>
+   <textarea name="" class="que_box"  onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" placeholder="请详细描述你要咨询的问题及背景情况，但不要透露具体的人名、公司名称、地址等可能涉及隐私的内容。"></textarea>
+   <script>
+      function xssCheck(str,reg){
+        return str ? str.replace(reg ||/[&<">'](?:(amp|lt|quot|gt|#39|nbsp|#\d+);)?/g,function (a, b) {
+          if(b){
+            return a;
+          }else{
+            return{
+              '<':'&lt;',
+              '&':'&amp;',
+              '"':'&quot;',
+              '>':'&gt;'
+            }[a]
+          }
+        }): '';
+      };
+
+     document.querySelector('.que_box').onkeyup = function () {
+      console.log(this.value)
+      
+      this.value = xssCheck(this.value)
+     }
+     
+   </script>
+</body>
+</html>
